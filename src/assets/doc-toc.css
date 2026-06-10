@@ -210,7 +210,7 @@ body.doc-index-open .doc-index-overlay {
     pointer-events: auto;
 }
 
-@media (min-width: 1361px) {
+@media (min-width: 801px) {
     .doc-index-button,
     .doc-index-overlay {
         display: none !important;
@@ -233,7 +233,7 @@ body.doc-index-open .doc-index-overlay {
     }
 }
 
-@media (max-width: 1360px) {
+@media (max-width: 800px) {
     .doc-index-button {
         display: grid;
         place-items: center;
@@ -311,7 +311,7 @@ body.doc-index-open .doc-index-overlay {
     }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 600px) {
     #doc-toc,
     .doc-toc {
         display: none !important;
@@ -329,7 +329,7 @@ body.doc-index-open .doc-index-overlay {
     }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 500px) {
     .dev-main,
     .developer-main,
     .policy-main {
@@ -339,7 +339,7 @@ body.doc-index-open .doc-index-overlay {
     }
 }
 
-@media (max-width: 1360px) {
+@media (max-width: 560px) {
     .doc-index-button {
         left: 10px !important;
         right: auto !important;
@@ -357,13 +357,13 @@ body.doc-index-open .doc-index-overlay {
     }
 }
 
-@media (min-width: 1361px) {
+@media (min-width: 801px) {
     nav .nav-brand {
         margin-left: 0 !important;
     }
 }
 
-@media (max-width: 860px) {
+@media (max-width: 600px) {
     #doc-toc,
     .doc-toc {
         display: none !important;
