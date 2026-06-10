@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://developer.mochios.org/sitemap.xml

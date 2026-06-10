@@ -1,0 +1,114 @@
+{
+    "site": {
+        "title": "mochiOS Developer",
+        "description": "mochiOS向け開発者情報"
+    },
+    "sections": [
+        {
+            "label": "Start",
+            "items": [
+                {
+                    "path": "/",
+                    "navTitle": "Overview",
+                    "title": "mochiOS Developer",
+                    "eyebrow": "Developer Center",
+                    "category": "Start",
+                    "subtitle": "mochiOS向けアプリ、サービス、パッケージを作るための開発者向け情報です。",
+                    "markdown": "/content/index.md"
+                },
+                {
+                    "path": "/guides/getting-started/",
+                    "navTitle": "Getting Started",
+                    "title": "はじめに",
+                    "eyebrow": "Guide",
+                    "category": "Start",
+                    "subtitle": "mochiOS向け開発を始める前に必要な前提と流れを整理します。",
+                    "markdown": "/content/guides/getting-started.md"
+                }
+            ]
+        },
+        {
+            "label": "App Development",
+            "items": [
+                {
+                    "path": "/guides/app-structure/",
+                    "navTitle": "App Structure",
+                    "title": "アプリ構成",
+                    "eyebrow": "Guide",
+                    "category": "App Development",
+                    "subtitle": "mochiOSアプリのディレクトリ構成、実行ファイル、アセット、メタデータの基本です。",
+                    "markdown": "/content/guides/app-structure.md"
+                },
+                {
+                    "path": "/guides/packaging/",
+                    "navTitle": "Packaging",
+                    "title": "パッケージ作成",
+                    "eyebrow": "Guide",
+                    "category": "App Development",
+                    "subtitle": "App.appを配布可能なパッケージにまとめるための形式と検証対象です。",
+                    "markdown": "/content/guides/packaging.md"
+                }
+            ]
+        },
+        {
+            "label": "AppStore",
+            "items": [
+                {
+                    "path": "/appstore/overview/",
+                    "navTitle": "Overview",
+                    "title": "mochiOS AppStore概要",
+                    "eyebrow": "AppStore",
+                    "category": "AppStore",
+                    "subtitle": "mochiOS AppStoreでアプリを公開するための基本的な流れです。",
+                    "markdown": "/content/appstore/overview.md"
+                },
+                {
+                    "path": "/appstore/review/",
+                    "navTitle": "Review",
+                    "title": "審査の考え方",
+                    "eyebrow": "AppStore",
+                    "category": "AppStore",
+                    "subtitle": "提出されたアプリを確認するときの技術的な観点です。",
+                    "markdown": "/content/appstore/review.md"
+                }
+            ]
+        },
+        {
+            "label": "Reference",
+            "items": [
+                {
+                    "path": "/reference/manifest/",
+                    "navTitle": "Manifest",
+                    "title": "about.tomlリファレンス",
+                    "eyebrow": "Reference",
+                    "category": "Reference",
+                    "subtitle": "アプリメタデータを記述するabout.tomlの項目です。",
+                    "markdown": "/content/reference/manifest.md"
+                },
+                {
+                    "path": "/reference/capabilities/",
+                    "navTitle": "Capabilities",
+                    "title": "Capabilityリファレンス",
+                    "eyebrow": "Reference",
+                    "category": "Reference",
+                    "subtitle": "アプリやサービスに付与されるCapabilityの考え方です。",
+                    "markdown": "/content/reference/capabilities.md"
+                }
+            ]
+        },
+        {
+            "label": "Design",
+            "items": [
+                {
+                    "path": "/design/guidelines/",
+                    "navTitle": "Guidelines",
+                    "title": "デザインガイドライン",
+                    "eyebrow": "Design",
+                    "category": "Design",
+                    "subtitle": "mochiOS向けアプリのデザインガイドラインです。",
+                    "markdown": "/content/design/guidelines.md"
+                }
+            ]
+        }
+    ]
+}
