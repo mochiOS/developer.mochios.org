@@ -1,222 +1,258 @@
 (() => {
-    const CONTENT_SELECTOR = ".markdown";
-    const HEADING_SELECTOR = "h1, h2, h3";
-    const TOC_ID = "doc-toc";
-    const LINK_ACTIVE_CLASS = "active";
+    const DESKTOP_QUERY = "(min-width: 1280px)";
+    const HEADING_SELECTOR = ".markdown h1, .markdown h2, .markdown h3";
 
-    let lastSignature = "";
+    let desktopToc = null;
+    let mobileToc = null;
     let observer = null;
-    let ticking = false;
-    let mutationObserver = null;
+    let lastHeadingSignature = "";
 
-    function escapeHtml(value) {
-        return String(value)
-            .replaceAll("&", "&amp;")
-            .replaceAll("<", "&lt;")
-            .replaceAll(">", "&gt;")
-            .replaceAll('"', "&quot;")
-            .replaceAll("'", "&#039;");
-    }
-
-    function getContent() {
-        return document.querySelector(CONTENT_SELECTOR);
+    function slugify(value) {
+        return value
+            .trim()
+            .toLowerCase()
+            .replace(/[^\p{Letter}\p{Number}]+/gu, "-")
+            .replace(/^-+|-+$/g, "") || "section";
     }
 
     function getHeadings() {
-        const content = getContent();
-
-        if (!content) {
-            return [];
-        }
-
-        return Array.from(content.querySelectorAll(HEADING_SELECTOR))
-            .filter(heading => heading.textContent.trim().length > 0);
-    }
-
-    function makeHeadingId(index) {
-        return `section-${index + 1}`;
+        return Array.from(document.querySelectorAll(HEADING_SELECTOR))
+            .filter(heading => heading.textContent.trim() !== "");
     }
 
     function ensureHeadingIds(headings) {
         const used = new Set();
 
-        headings.forEach((heading, index) => {
-            let id = heading.id && heading.id.trim() ? heading.id.trim() : makeHeadingId(index);
-            let uniqueId = id;
-            let count = 2;
+        headings.forEach(heading => {
+            let base = heading.id || slugify(heading.textContent);
+            let id = base;
+            let index = 2;
 
-            while (used.has(uniqueId)) {
-                uniqueId = `${id}-${count}`;
-                count += 1;
+            while (used.has(id) || document.querySelectorAll(`#${CSS.escape(id)}`).length > 1) {
+                id = `${base}-${index}`;
+                index += 1;
             }
 
-            heading.id = uniqueId;
-            used.add(uniqueId);
+            heading.id = id;
+            used.add(id);
         });
     }
 
-    function getSignature(headings) {
+    function getHeadingLevel(heading) {
+        return Number(heading.tagName.slice(1));
+    }
+
+    function getHeadingSignature(headings) {
         return headings.map(heading => {
             return `${heading.tagName}:${heading.id}:${heading.textContent.trim()}`;
         }).join("|");
     }
 
-    function ensureTocElement() {
-        let toc = document.getElementById(TOC_ID);
+    function createLink(heading) {
+        const link = document.createElement("a");
+        link.className = "doc-toc-link";
+        link.href = `#${heading.id}`;
+        link.textContent = heading.textContent.trim();
+        link.dataset.targetId = heading.id;
 
-        if (toc) {
-            return toc;
+        link.addEventListener("click", event => {
+            event.preventDefault();
+
+            const target = document.getElementById(heading.id);
+
+            if (!target) {
+                return;
+            }
+
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+            history.replaceState(null, "", `#${heading.id}`);
+
+            if (mobileToc) {
+                const details = mobileToc.querySelector("details");
+
+                if (details) {
+                    details.open = false;
+                }
+            }
+        });
+
+        return link;
+    }
+
+    function buildList(headings) {
+        const list = document.createElement("ol");
+        list.className = "doc-toc-list";
+
+        headings.forEach(heading => {
+            const item = document.createElement("li");
+            item.className = `doc-toc-item doc-toc-level-${getHeadingLevel(heading)}`;
+
+            item.appendChild(createLink(heading));
+            list.appendChild(item);
+        });
+
+        return list;
+    }
+
+    function ensureDesktopToc() {
+        if (desktopToc) {
+            return desktopToc;
         }
 
-        toc = document.createElement("aside");
-        toc.id = TOC_ID;
-        toc.className = "doc-toc";
-        toc.setAttribute("aria-label", "ページ内目次");
-        document.body.appendChild(toc);
+        desktopToc = document.createElement("aside");
+        desktopToc.id = "doc-toc";
+        desktopToc.className = "doc-toc";
+        desktopToc.setAttribute("aria-label", "ページ内目次");
 
-        return toc;
+        document.body.appendChild(desktopToc);
+
+        return desktopToc;
     }
 
-    function levelOf(heading) {
-        return Number(heading.tagName.slice(1));
+    function findContentMountPoint() {
+        return document.querySelector("[data-dev-content]")
+            || document.querySelector("[data-developer-content]")
+            || document.querySelector("[data-policy-content]")
+            || document.querySelector(".markdown");
     }
 
-    function renderToc(headings) {
-        const toc = ensureTocElement();
+    function ensureMobileToc() {
+        if (mobileToc) {
+            return mobileToc;
+        }
 
-        if (headings.length < 2) {
+        mobileToc = document.createElement("section");
+        mobileToc.id = "doc-toc-mobile";
+        mobileToc.className = "doc-toc-mobile";
+        mobileToc.setAttribute("aria-label", "ページ内目次");
+
+        const mountPoint = findContentMountPoint();
+
+        if (mountPoint && mountPoint.parentNode) {
+            mountPoint.parentNode.insertBefore(mobileToc, mountPoint);
+        } else {
+            document.body.prepend(mobileToc);
+        }
+
+        return mobileToc;
+    }
+
+    function renderDesktopToc(headings) {
+        const toc = ensureDesktopToc();
+        toc.innerHTML = "";
+
+        if (headings.length <= 1) {
             toc.hidden = true;
-            toc.innerHTML = "";
             return;
         }
 
+        const inner = document.createElement("div");
+        inner.className = "doc-toc-nav";
+
+        inner.appendChild(buildList(headings));
+        toc.appendChild(inner);
         toc.hidden = false;
-        toc.innerHTML = `
-            <nav class="doc-toc-nav">
-                <ol class="doc-toc-list">
-                    ${headings.map(heading => {
-                        const level = levelOf(heading);
-                        const title = heading.textContent.trim();
-
-                        return `
-                            <li class="doc-toc-item doc-toc-level-${level}">
-                                <a class="doc-toc-link" href="#${escapeHtml(heading.id)}" data-doc-toc-link="${escapeHtml(heading.id)}">
-                                    ${escapeHtml(title)}
-                                </a>
-                            </li>
-                        `;
-                    }).join("")}
-                </ol>
-            </nav>
-        `;
     }
 
-    function setActive(id) {
-        document.querySelectorAll("[data-doc-toc-link]").forEach(link => {
-            link.classList.toggle(LINK_ACTIVE_CLASS, link.dataset.docTocLink === id);
-        });
-    }
+    function renderMobileToc(headings) {
+        const toc = ensureMobileToc();
+        toc.innerHTML = "";
 
-    function observeActiveHeading(headings) {
-        if (observer) {
-            observer.disconnect();
+        if (headings.length <= 1) {
+            toc.hidden = true;
+            return;
         }
+
+        const details = document.createElement("details");
+        details.className = "doc-toc-accordion";
+
+        const summary = document.createElement("summary");
+        summary.className = "doc-toc-summary";
+        summary.textContent = "このページの目次";
+
+        const body = document.createElement("div");
+        body.className = "doc-toc-accordion-body";
+        body.appendChild(buildList(headings));
+
+        details.appendChild(summary);
+        details.appendChild(body);
+        toc.appendChild(details);
+        toc.hidden = false;
+    }
+
+    function updateActiveLink() {
+        const headings = getHeadings();
 
         if (headings.length === 0) {
             return;
         }
 
-        observer = new IntersectionObserver(entries => {
-            const visible = entries
-                .filter(entry => entry.isIntersecting)
-                .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        let active = headings[0];
 
-            if (visible.length > 0) {
-                setActive(visible[0].target.id);
-                return;
+        for (const heading of headings) {
+            const rect = heading.getBoundingClientRect();
+
+            if (rect.top <= 120) {
+                active = heading;
+            } else {
+                break;
             }
+        }
 
-            const headingsAboveViewport = headings
-                .filter(heading => heading.getBoundingClientRect().top < 120);
-            const above = headingsAboveViewport[headingsAboveViewport.length - 1];
-
-            if (above) {
-                setActive(above.id);
-            }
-        }, {
-            root: null,
-            rootMargin: "-96px 0px -65% 0px",
-            threshold: [0, 1]
-        });
-
-        headings.forEach(heading => observer.observe(heading));
-        setActive(headings[0].id);
-    }
-
-    function enableTocClick() {
-        document.addEventListener("click", event => {
-            const link = event.target.closest("[data-doc-toc-link]");
-
-            if (!link) {
-                return;
-            }
-
-            const heading = document.getElementById(link.dataset.docTocLink);
-
-            if (!heading) {
-                return;
-            }
-
-            event.preventDefault();
-            heading.scrollIntoView({ behavior: "smooth", block: "start" });
-            history.replaceState(null, "", `#${heading.id}`);
-            setActive(heading.id);
+        document.querySelectorAll(".doc-toc-link").forEach(link => {
+            link.classList.toggle("active", link.dataset.targetId === active.id);
         });
     }
 
-    function rebuildToc() {
-        ticking = false;
-
+    function renderToc() {
         const headings = getHeadings();
+
         ensureHeadingIds(headings);
 
-        const signature = getSignature(headings);
+        const signature = getHeadingSignature(headings);
 
-        if (signature === lastSignature) {
+        if (signature === lastHeadingSignature) {
+            updateActiveLink();
             return;
         }
 
-        lastSignature = signature;
-        renderToc(headings);
-        observeActiveHeading(headings);
+        lastHeadingSignature = signature;
+
+        renderDesktopToc(headings);
+        renderMobileToc(headings);
+        updateActiveLink();
     }
 
-    function scheduleRebuild() {
-        if (ticking) {
-            return;
+    function observeMarkdownChanges() {
+        if (observer) {
+            observer.disconnect();
         }
 
-        ticking = true;
-        requestAnimationFrame(rebuildToc);
-    }
+        observer = new MutationObserver(() => {
+            window.requestAnimationFrame(renderToc);
+        });
 
-    function observeDocumentChanges() {
-        mutationObserver = new MutationObserver(scheduleRebuild);
-        mutationObserver.observe(document.body, {
+        observer.observe(document.body, {
             childList: true,
             subtree: true
         });
     }
 
     function init() {
-        ensureTocElement();
-        enableTocClick();
-        observeDocumentChanges();
-        scheduleRebuild();
+        renderToc();
+        observeMarkdownChanges();
+
+        window.addEventListener("scroll", updateActiveLink, { passive: true });
+        window.addEventListener("resize", updateActiveLink);
+        window.matchMedia(DESKTOP_QUERY).addEventListener("change", updateActiveLink);
     }
 
     if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", init, { once: true });
+        document.addEventListener("DOMContentLoaded", init);
     } else {
         init();
     }
