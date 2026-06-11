@@ -1,7 +1,7 @@
 {
     "site": {
         "title": "mochiOS Developer",
-        "description": "mochiOS向け開発者情報"
+        "description": "mochiOSの開発者に向けた各種情報"
     },
     "sections": [
         {
@@ -29,6 +29,20 @@
                     "category": "Design",
                     "subtitle": "mochiOS向けアプリのデザインガイドラインです。",
                     "markdown": "/content/design/guidelines.md"
+                }
+            ]
+        },
+        {
+            "label": "devkit",
+            "items": [
+                {
+                    "path": "/devkit/",
+                    "navTitle": "About devkit",
+                    "title": "devkitについて",
+                    "eyebrow": "devkit",
+                    "category": "tools",
+                    "subtitle": "mochiOSのアプリ開発などに使われるdevkitについて",
+                    "markdown": "/content/devkit/index.md"
                 }
             ]
         }
