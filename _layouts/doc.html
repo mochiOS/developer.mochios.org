@@ -1,30 +1,37 @@
 ---
 layout: base
 ---
+
 <div class="dev-layout">
   {% include sidebar.html %}
-  <main class="dev-main developer-main" id="main">
-    <div class="dev-document">
+
+  <main class="dev-main">
+    <article class="dev-document">
       <header class="dev-hero">
-        {% if page.eyebrow %}<div class="dev-eyebrow">{{ page.eyebrow }}</div>{% endif %}
+        {% if page.eyebrow %}
+        <div class="dev-eyebrow">{{ page.eyebrow }}</div>
+        {% else %}
+        <div class="dev-eyebrow">Documentation</div>
+        {% endif %}
+
         <h1 class="dev-title">{{ page.title }}</h1>
-        {% if page.description %}<p class="dev-subtitle">{{ page.description }}</p>{% endif %}
-        <div class="dev-meta" aria-label="Page metadata">
-          {% if page.status %}<span class="dev-pill">{{ page.status }}</span>{% endif %}
-          {% if page.area %}<span class="dev-pill">{{ page.area }}</span>{% endif %}
-          {% if page.updated %}<span class="dev-pill">Updated {{ page.updated }}</span>{% endif %}
-        </div>
+
+        {% if page.description %}
+        <p class="dev-subtitle">{{ page.description }}</p>
+        {% endif %}
       </header>
 
       {% include toc.html %}
 
-      <article class="doc-card markdown" data-doc-content>
-        {{ content }}
-      </article>
+      <div class="doc-card">
+        <div class="markdown">
+          {{ content }}
+        </div>
+      </div>
+    </article>
 
-      <footer class="dev-footer">
-        <span>{{ site.title }}</span>
-      </footer>
-    </div>
+    <footer class="dev-footer">
+      <a href="{{ '/' | relative_url }}">mochiOS Developer</a>
+    </footer>
   </main>
 </div>
