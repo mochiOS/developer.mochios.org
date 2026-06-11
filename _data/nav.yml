@@ -1,21 +1,74 @@
-sections:
-  - title: Start
-    items:
-      - title: Overview
-        url: /
-      - title: Getting Started
-        url: /docs/getting-started/
-      - title: GitHub Pages
-        url: /docs/guides/github-pages/
-  - title: Concepts
-    items:
-      - title: Kernel
-        url: /docs/concepts/kernel/
-      - title: App Packages
-        url: /docs/concepts/app-packages/
-      - title: Capability
-        url: /docs/concepts/capability/
-  - title: Reference
-    items:
-      - title: Services API
-        url: /docs/api/services/
+- label: Start
+  items:
+    - title: Home
+      url: /
+    - title: Docs
+      url: /docs/
+    - title: Overview
+      url: /docs/overview/
+    - title: Development
+      url: /docs/development/
+
+- label: System
+  items:
+    - title: Boot
+      url: /docs/boot/
+    - title: Memory
+      url: /docs/memory/
+    - title: Interrupts
+      url: /docs/interrupts/
+    - title: Tasks
+      url: /docs/tasks/
+    - title: Filesystems
+      url: /docs/filesystems/
+    - title: Syscalls
+      url: /docs/syscalls/
+    - title: Capabilities Policy
+      url: /docs/capabilities-policy/
+
+- label: Memory
+  items:
+    - title: Paging
+      url: /docs/memory/paging/
+    - title: Heap
+      url: /docs/memory/heap/
+    - title: GDT / TSS
+      url: /docs/memory/gdt-tss/
+
+- label: Interrupts
+  items:
+    - title: IDT
+      url: /docs/interrupts/idt/
+    - title: Syscall
+      url: /docs/interrupts/syscall/
+    - title: Timer
+      url: /docs/interrupts/timer/
+
+- label: Tasks
+  items:
+    - title: Process
+      url: /docs/tasks/process/
+    - title: Thread
+      url: /docs/tasks/thread/
+    - title: Scheduler
+      url: /docs/tasks/scheduler/
+
+- label: Filesystems
+  items:
+    - title: Initfs
+      url: /docs/filesystems/initfs/
+    - title: Kernel Modules
+      url: /docs/filesystems/kmod/
+
+- label: Syscalls
+  items:
+    - title: Dispatch
+      url: /docs/syscalls/dispatch/
+    - title: Exec
+      url: /docs/syscalls/exec/
+    - title: Filesystem API
+      url: /docs/syscalls/fs/
+    - title: Time / Signal
+      url: /docs/syscalls/time-signal/
+    - title: User Access
+      url: /docs/syscalls/user-access/
