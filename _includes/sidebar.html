@@ -1,0 +1,17 @@
+<aside class="dev-sidebar developer-sidebar" aria-label="Documentation navigation">
+  {% for section in site.data.nav.sections %}
+    <section class="sb-section">
+      <div class="sb-label">{{ section.title }}</div>
+      {% for item in section.items %}
+        {% assign current = false %}
+        {% if page.url == item.url %}
+          {% assign current = true %}
+        {% endif %}
+        <a class="sb-link{% if current %} active{% endif %}" href="{{ item.url | relative_url }}"{% if current %} aria-current="page"{% endif %}>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          <span>{{ item.title }}</span>
+        </a>
+      {% endfor %}
+    </section>
+  {% endfor %}
+</aside>

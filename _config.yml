@@ -1,0 +1,14 @@
+title: mochiOS Developer
+description: Documentation and guides for developers.
+lang: ja
+url: ""
+baseurl: ""
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+permalink: pretty
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md

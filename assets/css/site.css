@@ -1,0 +1,208 @@
+/* Project-specific additions on top of the provided design tokens. */
+
+body {
+    min-width: 320px;
+}
+
+.top-link {
+    color: var(--g600);
+    font-size: 13px;
+    text-decoration: none;
+    padding: 6px 8px;
+    border-radius: var(--rs);
+}
+
+.top-link:hover {
+    color: var(--black);
+    background: var(--g100);
+}
+
+.dev-document {
+    width: 100%;
+}
+
+.dev-kicker-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.dev-card-grid,
+.markdown .dev-card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 16px 0 24px;
+}
+
+.feature-card {
+    display: block;
+    min-height: 150px;
+    padding: 18px;
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    background: var(--white);
+    color: var(--black);
+    text-decoration: none !important;
+    box-shadow: var(--shadow);
+    transition: background 0.12s, transform 0.12s, box-shadow 0.12s;
+}
+
+.feature-card:hover {
+    background: var(--g100);
+    transform: translateY(-1px);
+}
+
+.feature-card .feature-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--mono);
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.feature-card .feature-title {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    letter-spacing: -0.02em;
+}
+
+.feature-card .feature-text {
+    color: var(--g600);
+    font-size: 12.5px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.callout {
+    margin: 18px 0;
+    padding: 15px 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    background: var(--g100);
+}
+
+.callout-title {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.callout p:last-child {
+    margin-bottom: 0;
+}
+
+.markdown table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--rs);
+    font-size: 13.5px;
+}
+
+.markdown th,
+.markdown td {
+    border-bottom: 1px solid var(--border);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.markdown th {
+    background: var(--g100);
+    font-weight: 500;
+    color: var(--black);
+}
+
+.markdown tr:last-child td {
+    border-bottom: none;
+}
+
+.markdown img {
+    max-width: 100%;
+    border-radius: var(--r);
+    border: 1px solid var(--border);
+}
+
+.markdown .lead {
+    color: var(--g600);
+    font-size: 15.5px;
+    line-height: 1.8;
+}
+
+@media (max-width: 980px) {
+    .dev-card-grid,
+    .markdown .dev-card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 860px) {
+    .dev-sidebar {
+        position: fixed;
+    }
+
+    .dev-main {
+        padding-top: 32px;
+    }
+}
+
+@media (max-width: 600px) {
+    .doc-card {
+        border-radius: 18px;
+    }
+
+    .dev-title {
+        font-size: 30px;
+    }
+}
+
+/* Keep the desktop documentation layout stable until the drawer breakpoint. */
+@media (min-width: 801px) and (max-width: 860px) {
+    .dev-layout {
+        display: flex !important;
+    }
+
+    .dev-sidebar {
+        width: var(--toc) !important;
+        position: fixed !important;
+        top: var(--nav) !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        padding: 22px 14px !important;
+        border-right: 1px solid var(--border) !important;
+        border-bottom: none !important;
+        background: var(--white) !important;
+        display: block !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+    }
+
+    .dev-sidebar .sb-section {
+        display: block !important;
+        margin-bottom: 24px !important;
+    }
+
+    .dev-sidebar .sb-label {
+        display: block !important;
+    }
+
+    .dev-sidebar .sb-link {
+        white-space: normal !important;
+    }
+
+    .dev-main {
+        margin-left: var(--toc) !important;
+        padding: 44px calc(44px + var(--doc-toc-width) + var(--doc-toc-right)) 44px 44px !important;
+    }
+}

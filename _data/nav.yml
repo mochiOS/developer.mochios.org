@@ -1,0 +1,21 @@
+sections:
+  - title: Start
+    items:
+      - title: Overview
+        url: /
+      - title: Getting Started
+        url: /docs/getting-started/
+      - title: GitHub Pages
+        url: /docs/guides/github-pages/
+  - title: Concepts
+    items:
+      - title: Kernel
+        url: /docs/concepts/kernel/
+      - title: App Packages
+        url: /docs/concepts/app-packages/
+      - title: Capability
+        url: /docs/concepts/capability/
+  - title: Reference
+    items:
+      - title: Services API
+        url: /docs/api/services/
