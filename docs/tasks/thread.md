@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: thread
 permalink: /docs/tasks/thread/
 ---

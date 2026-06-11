@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: タイマー
 permalink: /docs/interrupts/timer/
 ---

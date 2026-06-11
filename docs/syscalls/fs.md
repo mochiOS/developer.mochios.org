@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: fs
 permalink: /docs/syscalls/fs/
 ---

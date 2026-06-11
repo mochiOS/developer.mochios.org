@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: ページング
 permalink: /docs/memory/paging/
 ---

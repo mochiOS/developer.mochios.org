@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: scheduler
 permalink: /docs/tasks/scheduler/
 ---

@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: 起動
 permalink: /docs/boot/
 ---

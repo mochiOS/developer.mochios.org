@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: initfs と rootfs
 permalink: /docs/filesystems/initfs/
 ---

@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: システムコール
 permalink: /docs/syscalls/
 ---

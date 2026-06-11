@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: process
 permalink: /docs/tasks/process/
 ---

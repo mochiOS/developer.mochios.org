@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: kmod
 permalink: /docs/filesystems/kmod/
 ---

@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: mnu カーネル
 permalink: /docs/
 ---

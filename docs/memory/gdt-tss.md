@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: GDT と TSS
 permalink: /docs/memory/gdt-tss/
 ---

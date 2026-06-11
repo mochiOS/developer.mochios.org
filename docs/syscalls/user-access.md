@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: 安全なユーザーアクセス
 permalink: /docs/syscalls/user-access/
 ---

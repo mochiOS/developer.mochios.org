@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: ファイルシステム
 permalink: /docs/filesystems/
 ---

@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: capability とポリシー
 permalink: /docs/capabilities-policy/
 ---

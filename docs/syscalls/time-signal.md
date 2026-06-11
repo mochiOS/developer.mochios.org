@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: time と signal
 permalink: /docs/syscalls/time-signal/
 ---

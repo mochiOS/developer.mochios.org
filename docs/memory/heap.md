@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: ヒープ
 permalink: /docs/memory/heap/
 ---

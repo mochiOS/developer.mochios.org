@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: IDT
 permalink: /docs/interrupts/idt/
 ---

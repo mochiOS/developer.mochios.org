@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: メモリ
 permalink: /docs/memory/
 ---

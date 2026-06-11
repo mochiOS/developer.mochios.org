@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: 割り込み
 permalink: /docs/interrupts/
 ---

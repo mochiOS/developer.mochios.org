@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: 全体像
 permalink: /docs/overview/
 ---

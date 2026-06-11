@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: exec
 permalink: /docs/syscalls/exec/
 ---

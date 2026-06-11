@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: dispatch
 permalink: /docs/syscalls/dispatch/
 ---

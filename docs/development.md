@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: 開発者向けメモ
 permalink: /docs/development/
 ---

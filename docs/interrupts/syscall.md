@@ -1,4 +1,5 @@
 ---
+layout: doc
 title: syscall 入口
 permalink: /docs/interrupts/syscall/
 ---
