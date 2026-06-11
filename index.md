@@ -3,16 +3,6 @@ layout: doc
 title: mochiOS Developer
 ---
 
-<div align="center">
-
-# mochiOS Developer
-
-mochiOS 向けのアプリ、サービス、システムコンポーネントを開発するための開発者ポータルです。
-
-[ドキュメントを開く](/docs/)
-
-</div>
-
 ## mochiOS の開発をはじめる
 
 mochiOS Developer では、mochiOS 上で動作するソフトウェアを作るための情報をまとめています。
