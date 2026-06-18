@@ -15,4 +15,4 @@ defaults:
   - scope:
       path: "docs"
     values:
-      layout: docs
+      layout: doc
