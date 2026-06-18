@@ -1,7 +1,7 @@
 ---
 layout: doc
 title: mnu カーネル
-permalink: /docs/
+permalink: /docs/mnu/
 ---
 
 # mnu カーネル
