@@ -6,8 +6,8 @@ sections:
   - title: Design
     items:
       - title: Design Guidelines
-        url: /docs/design.md
+        url: /docs/design/
   - title: System
     items:
       - title: The mnu kernel
-        url: /docs/mnu/index.md
+        url: /docs/mnu/
