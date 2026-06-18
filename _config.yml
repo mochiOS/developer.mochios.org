@@ -10,3 +10,9 @@ kramdown:
 permalink: pretty
 exclude:
   - README.md
+
+defaults:
+  - scope:
+      path: "docs"
+    values:
+      layout: docs
